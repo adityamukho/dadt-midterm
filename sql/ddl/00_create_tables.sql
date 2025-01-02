@@ -1,58 +1,52 @@
-CREATE TABLE companies (
-    company_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    ticker VARCHAR(10) UNIQUE NOT NULL,
-    sector VARCHAR(255),
-    industry VARCHAR(255),
-    market_cap BIGINT
+CREATE TABLE sector_graph
+(
+    id        INT AUTO_INCREMENT PRIMARY KEY,
+    parent_id INT,
+    name      VARCHAR(255) NOT NULL,
+    FOREIGN KEY (parent_id) REFERENCES sector_graph (id) ON DELETE CASCADE
 );
 
-CREATE TABLE stock_prices (
-    price_id INT AUTO_INCREMENT PRIMARY KEY,
-    company_id INT NOT NULL,
-    date DATE NOT NULL,
-    open_price DECIMAL(10, 2),
-    close_price DECIMAL(10, 2),
-    high DECIMAL(10, 2),
-    low DECIMAL(10, 2),
-    volume BIGINT,
-    FOREIGN KEY (company_id) REFERENCES companies(company_id) ON DELETE CASCADE
+CREATE TABLE companies
+(
+    symbol         VARCHAR(10) PRIMARY KEY,
+    name           VARCHAR(255) NOT NULL,
+    sector_leaf_id INT,
+    headquarters   VARCHAR(255) NOT NULL,
+    date_added     DATE         NOT NULL,
+    cik            INT          NOT NULL,
+    founded        VARCHAR(20)  NOT NULL,
+    sec_filings    VARCHAR(255) NOT NULL,
+    FOREIGN KEY (sector_leaf_id) REFERENCES sector_graph (id) ON DELETE SET NULL
 );
 
-CREATE TABLE market_indices (
-    index_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    ticker VARCHAR(10) UNIQUE NOT NULL,
-    description TEXT,
-    region VARCHAR(255)
+CREATE TABLE company_financials
+(
+    symbol              VARCHAR(10) NOT NULL,
+    as_of_date          DATE        NOT NULL,
+    price               DECIMAL(20, 16),
+    price_earnings      DECIMAL(20, 16),
+    dividend_yield      DECIMAL(20, 16),
+    earnings_share      DECIMAL(20, 16),
+    fifty_two_week_low  DECIMAL(20, 16),
+    fifty_two_week_high DECIMAL(20, 16),
+    market_cap          BIGINT,
+    ebitda              BIGINT,
+    price_sales         DECIMAL(20, 16),
+    price_book          DECIMAL(20, 16),
+    PRIMARY KEY (symbol, as_of_date),
+    FOREIGN KEY (symbol) REFERENCES companies (symbol) ON DELETE CASCADE
 );
 
-CREATE TABLE index_components (
-    index_id INT NOT NULL,
-    company_id INT NOT NULL,
-    PRIMARY KEY (index_id, company_id),
-    FOREIGN KEY (index_id) REFERENCES market_indices(index_id) ON DELETE CASCADE,
-    FOREIGN KEY (company_id) REFERENCES companies(company_id) ON DELETE CASCADE
+CREATE TABLE sp500_index_data
+(
+    date                 DATE PRIMARY KEY,
+    level                DECIMAL(20, 16),
+    dividend             DECIMAL(20, 16),
+    earnings             DECIMAL(20, 16),
+    consumer_price_index DECIMAL(20, 16),
+    long_interest_rate   DECIMAL(20, 16),
+    real_price           DECIMAL(20, 16),
+    real_dividend        DECIMAL(20, 16),
+    real_earnings        DECIMAL(20, 16),
+    pe_10                DECIMAL(20, 16)
 );
-
-CREATE TABLE historical_indices (
-    index_price_id INT AUTO_INCREMENT PRIMARY KEY,
-    index_id INT NOT NULL,
-    date DATE NOT NULL,
-    open_price DECIMAL(10, 2),
-    close_price DECIMAL(10, 2),
-    high DECIMAL(10, 2),
-    low DECIMAL(10, 2),
-    volume BIGINT,
-    FOREIGN KEY (index_id) REFERENCES market_indices(index_id) ON DELETE CASCADE
-);
-
--- CREATE TABLE transactions (
---     transaction_id INT AUTO_INCREMENT PRIMARY KEY,
---     company_id INT NOT NULL,
---     date DATE NOT NULL,
---     transaction_type ENUM('buy', 'sell') NOT NULL,
---     quantity INT,
---     price DECIMAL(10, 2),
---     FOREIGN KEY (company_id) REFERENCES companies(company_id) ON DELETE CASCADE
--- );
