@@ -1,4 +1,4 @@
-CREATE TABLE sector_graph
+CREATE TABLE IF NOT EXISTS sector_graph
 (
     id        INT AUTO_INCREMENT PRIMARY KEY,
     parent_id INT,
@@ -6,7 +6,7 @@ CREATE TABLE sector_graph
     FOREIGN KEY (parent_id) REFERENCES sector_graph (id) ON DELETE CASCADE
 );
 
-CREATE TABLE companies
+CREATE TABLE IF NOT EXISTS companies
 (
     symbol         VARCHAR(10) PRIMARY KEY,
     name           VARCHAR(255) NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE companies
     FOREIGN KEY (sector_leaf_id) REFERENCES sector_graph (id) ON DELETE SET NULL
 );
 
-CREATE TABLE company_financials
+CREATE TABLE IF NOT EXISTS company_financials
 (
     symbol              VARCHAR(10) NOT NULL,
     as_of_date          DATE        NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE company_financials
     FOREIGN KEY (symbol) REFERENCES companies (symbol) ON DELETE CASCADE
 );
 
-CREATE TABLE sp500_index_data
+CREATE TABLE IF NOT EXISTS sp500_index_data
 (
     date                 DATE PRIMARY KEY,
     level                DECIMAL(20, 16),
