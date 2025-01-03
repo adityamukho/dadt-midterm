@@ -1,0 +1,28 @@
+{
+  "name": "sp500-analytics",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.2",
+    "mysql2": "^3.6.5",
+    "next": "14.0.4",
+    "plotly.js": "^2.27.1",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.9.1",
+    "react-dom": "^18.2.0",
+    "react-plotly.js": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.17",
+    "@types/react-plotly.js": "^2.6.3",
+    "typescript": "^5.3.3"
+  }
+}

@@ -1,2 +1,5 @@
 .idea
 data/dumps
+.env
+node_modules
+.next
