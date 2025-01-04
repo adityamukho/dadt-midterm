@@ -4,6 +4,31 @@
   position: relative;
 }
 
-.navbar {
-  margin-bottom: 2rem;
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+}
+
+.sidebar .nav-link {
+  padding: 0.5rem 1rem;
+  color: #adb5bd;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out;
+}
+
+.sidebar .nav-link:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar .nav-link.active {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.6; }
 } 
