@@ -36,17 +36,3 @@ CREATE TABLE IF NOT EXISTS company_financials
     PRIMARY KEY (symbol, as_of_date),
     FOREIGN KEY (symbol) REFERENCES companies (symbol) ON DELETE CASCADE
 );
-
-CREATE TABLE IF NOT EXISTS sp500_index_data
-(
-    date                 DATE PRIMARY KEY,
-    level                DECIMAL(20, 16),
-    dividend             DECIMAL(20, 16),
-    earnings             DECIMAL(20, 16),
-    consumer_price_index DECIMAL(20, 16),
-    long_interest_rate   DECIMAL(20, 16),
-    real_price           DECIMAL(20, 16),
-    real_dividend        DECIMAL(20, 16),
-    real_earnings        DECIMAL(20, 16),
-    pe_10                DECIMAL(20, 16)
-);
