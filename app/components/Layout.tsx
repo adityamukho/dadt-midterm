@@ -28,7 +28,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { href: '/sector-performance', label: 'Sector Performance' },
     { href: '/pe-ratio', label: 'P/E Analysis' },
     { href: '/market-cap', label: 'Market Cap' },
-    { href: '/dividends', label: 'Dividend Analysis' },
     { href: '/growth', label: 'Growth Metrics' },
     { href: '/financial-health', label: 'Financial Health' },
     { href: '/value-growth', label: 'Value vs Growth' }
