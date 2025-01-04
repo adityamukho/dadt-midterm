@@ -6,7 +6,7 @@ import { Table, Card } from 'react-bootstrap';
 
 interface GrowthCompany {
   name: string;
-  'Sector/Subsector': string;
+  sector_subsector: string;
   price_earnings: number;
   price_book: number;
   price_sales: number;
@@ -76,7 +76,7 @@ export default function GrowthCompanies({ data }: { data: GrowthCompany[] }) {
                 <tr key={company.name}>
                   <td>{index + 1}</td>
                   <td>{company.name}</td>
-                  <td>{company['Sector/Subsector']}</td>
+                  <td>{company.sector_subsector}</td>
                   <td>{formatRatio(company.price_earnings)}</td>
                   <td>{formatRatio(company.price_book)}</td>
                   <td>{formatRatio(company.price_sales)}</td>

@@ -1,6 +1,6 @@
 SELECT 
     c.name,
-    CONCAT(sg1.name, '/', sg2.name) as 'Sector/Subsector',
+    CONCAT(sg1.name, '/', sg2.name) as sector_subsector,
     cf.price_earnings,
     cf.price_book,
     cf.price_sales,
