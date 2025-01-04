@@ -8,7 +8,7 @@ WITH cap_categories AS (
             ELSE 'Mid Cap (<10B)'
         END as cap_category
     FROM companies c
-    JOIN company_financials cf ON c.symbol = cf.symbol
+    INNER JOIN company_financials cf ON c.symbol = cf.symbol
     WHERE cf.as_of_date = '2025-01-02'
 )
 SELECT 
