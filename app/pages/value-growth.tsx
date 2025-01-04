@@ -97,7 +97,7 @@ export default function ValueVsGrowth({ data }: { data: ValueGrowthData[] }) {
     barmode: 'group',
     title: selectedSector 
       ? `Value vs Growth Companies in ${selectedSector} Sector`
-      : 'Value vs Growth Companies by Sector (Click to drill down)',
+      : 'Value vs Growth Companies by Sector <b>(Click to drill down)</b>',
     xaxis: {
       tickangle: -45,
       automargin: true
