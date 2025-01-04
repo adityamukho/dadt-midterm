@@ -23,11 +23,15 @@ SELECT temp_sector_graph.sub_sector
 from temp_sector_graph;
 
 UPDATE sector_graph sg
-SET parent_id = (SELECT DISTINCT sg1.id
-                 FROM sector_graph sg1
-                          INNER JOIN temp_sector_graph tsg ON sg1.name = tsg.sector
-                 WHERE tsg.sub_sector = sg.name)
-WHERE parent_id IS NULL;
+INNER JOIN (
+    SELECT sg2.id AS sub_sector_id, sg1.id AS parent_id
+    FROM sector_graph sg1
+    INNER JOIN temp_sector_graph tsg ON sg1.name = tsg.sector
+    INNER JOIN sector_graph sg2 ON tsg.sub_sector = sg2.name
+    WHERE sg2.parent_id IS NULL
+) AS derived
+ON sg.id = derived.sub_sector_id
+SET sg.parent_id = derived.parent_id;
 
 DROP TEMPORARY TABLE IF EXISTS temp_sector_graph;
 
