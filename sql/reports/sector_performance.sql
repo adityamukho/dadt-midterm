@@ -1,6 +1,6 @@
 SELECT 
     parent.name as sector,
-    COUNT(DISTINCT c.symbol) as company_count,
+    COUNT(c.symbol) as company_count,
     AVG(cf.market_cap) as avg_market_cap,
     AVG(cf.price_earnings) as avg_pe_ratio,
     AVG(cf.dividend_yield) as avg_dividend_yield
