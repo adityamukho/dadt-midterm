@@ -19,4 +19,4 @@ SELECT
     MAX(market_cap) as max_market_cap
 FROM cap_categories
 GROUP BY cap_category
-ORDER BY min_market_cap DESC; 
+ORDER BY min_market_cap DESC;
