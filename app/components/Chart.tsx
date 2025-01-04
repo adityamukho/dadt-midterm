@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import React, { useState } from 'react';
+import React, { useState, CSSProperties } from 'react';
 const Plot = dynamic(() => import('react-plotly.js'), { ssr: false });
 
 interface ChartProps {
@@ -7,6 +7,9 @@ interface ChartProps {
   layout: any;
   title: string;
   onClick?: (event: any) => void;
+  useResizeHandler?: boolean;
+  style?: CSSProperties;
+  config?: Partial<Plotly.Config>;
 }
 
 export default function Chart({ data, layout, title, onClick }: ChartProps) {
