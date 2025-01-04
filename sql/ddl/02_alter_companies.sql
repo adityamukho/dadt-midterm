@@ -1,6 +1,3 @@
-alter table companies
-    modify founded varchar(50) not null;
-
-alter table companies
-    modify sec_filings varchar(255) null;
-
+ALTER TABLE companies
+    MODIFY founded VARCHAR(50) NOT NULL,
+    MODIFY sec_filings VARCHAR(255) NULL;

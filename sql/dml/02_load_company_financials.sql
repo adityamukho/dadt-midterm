@@ -6,7 +6,6 @@ LOAD DATA LOCAL INFILE 'data/s-and-p-500-companies-financials/data/constituents-
     (@Symbol, @Name, @Sector, @Price, @Price_Earnings, @Dividend_Yield, @Earnings_Share, @52_Week_Low, @52_Week_High,
      @Market_Cap, @EBITDA, @Price_Sales, @Price_Book, @SEC_Filings)
     SET symbol = @Symbol,
-        as_of_date = CURRENT_DATE,
         price = @Price,
         price_earnings = @Price_Earnings,
         dividend_yield = @Dividend_Yield,

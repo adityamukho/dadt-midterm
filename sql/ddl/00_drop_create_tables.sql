@@ -1,4 +1,8 @@
-CREATE TABLE IF NOT EXISTS sector_graph
+DROP TABLE IF EXISTS company_financials;
+DROP TABLE IF EXISTS companies;
+DROP TABLE IF EXISTS sector_graph;
+
+CREATE TABLE sector_graph
 (
     id        INT AUTO_INCREMENT PRIMARY KEY,
     parent_id INT,
@@ -6,7 +10,7 @@ CREATE TABLE IF NOT EXISTS sector_graph
     FOREIGN KEY (parent_id) REFERENCES sector_graph (id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS companies
+CREATE TABLE companies
 (
     symbol         VARCHAR(10) PRIMARY KEY,
     name           VARCHAR(255) NOT NULL,
@@ -19,10 +23,9 @@ CREATE TABLE IF NOT EXISTS companies
     FOREIGN KEY (sector_leaf_id) REFERENCES sector_graph (id) ON DELETE SET NULL
 );
 
-CREATE TABLE IF NOT EXISTS company_financials
+CREATE TABLE company_financials
 (
     symbol              VARCHAR(10) NOT NULL,
-    as_of_date          DATE        NOT NULL,
     price               DECIMAL(20, 16),
     price_earnings      DECIMAL(20, 16),
     dividend_yield      DECIMAL(20, 16),
@@ -33,6 +36,6 @@ CREATE TABLE IF NOT EXISTS company_financials
     ebitda              BIGINT,
     price_sales         DECIMAL(20, 16),
     price_book          DECIMAL(20, 16),
-    PRIMARY KEY (symbol, as_of_date),
+    PRIMARY KEY (symbol),
     FOREIGN KEY (symbol) REFERENCES companies (symbol) ON DELETE CASCADE
 );
