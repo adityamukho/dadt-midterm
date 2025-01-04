@@ -25,11 +25,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const navItems = [
     { href: '/', label: 'Home' },
-    { href: '/sector-performance', label: 'Sector Performance' },
-    { href: '/pe-ratio', label: 'P/E Analysis' },
-    { href: '/market-cap', label: 'Market Cap' },
+    { href: '/value-growth', label: 'Value vs Growth' },
     { href: '/growth', label: 'Growth Metrics' },
-    { href: '/value-growth', label: 'Value vs Growth' }
+    { href: '/market-cap', label: 'Market Cap' },
+    { href: '/pe-ratio', label: 'P/E Analysis' },
+    { href: '/sector-performance', label: 'Sector Performance' },
   ];
 
   return (
