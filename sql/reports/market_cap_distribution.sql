@@ -9,7 +9,6 @@ WITH cap_categories AS (
         END as cap_category
     FROM companies c
     INNER JOIN company_financials cf ON c.symbol = cf.symbol
-    WHERE cf.as_of_date = '2025-01-02'
 )
 SELECT 
     cap_category,

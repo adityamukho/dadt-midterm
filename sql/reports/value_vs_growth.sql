@@ -9,8 +9,7 @@ FROM sector_graph sg1
 INNER JOIN sector_graph sg2 on sg1.id = sg2.parent_id
 INNER JOIN companies c ON c.sector_leaf_id = sg2.id
 INNER JOIN company_financials cf ON c.symbol = cf.symbol
-WHERE cf.as_of_date = '2025-01-02'
-    AND sg1.parent_id IS NULL
+WHERE sg1.parent_id IS NULL
     AND cf.price_earnings > 0
 GROUP BY sector, subsector
 ORDER BY sector, subsector;
