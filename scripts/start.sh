@@ -58,5 +58,8 @@ else
     npm i -g next@14.0.4
 fi
 
+# Build the app (let it fail in the RO environment)
+npm run build
+
 # Finally start the app
 npm start
