@@ -1,3 +1,4 @@
+-- Load CSV data directly into company_financials table
 LOAD DATA LOCAL INFILE 'data/s-and-p-500-companies-financials/data/constituents-financials.csv'
     IGNORE INTO TABLE company_financials
     FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'

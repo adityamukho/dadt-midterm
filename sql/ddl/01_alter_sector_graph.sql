@@ -1,3 +1,6 @@
+-- Using a stored procedure to check for the presence of a unique constraint on the sector_graph table,
+-- and creating one if not present. This is required to maintain idempotency.
+
 DELIMITER //
 
 DROP PROCEDURE IF EXISTS addUniqueConstraintIfNotExists;

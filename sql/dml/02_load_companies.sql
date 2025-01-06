@@ -1,3 +1,4 @@
+-- Create a temp table to load the relevant columns from `companies` constituents
 CREATE TEMPORARY TABLE IF NOT EXISTS temp_company_fields_1
 (
     symbol       VARCHAR(10)  NOT NULL,
@@ -9,8 +10,10 @@ CREATE TEMPORARY TABLE IF NOT EXISTS temp_company_fields_1
     founded      VARCHAR(50)  NOT NULL
 );
 
+-- Ensure it is empty initially
 TRUNCATE temp_company_fields_1;
 
+-- Load the CSV data
 LOAD DATA LOCAL INFILE 'data/s-and-p-500-companies/data/constituents.csv'
     INTO TABLE temp_company_fields_1
     FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
@@ -24,14 +27,17 @@ LOAD DATA LOCAL INFILE 'data/s-and-p-500-companies/data/constituents.csv'
         cik = @CIK,
         founded = @Founded;
 
+-- Create a temp table to load the relevant columns from `companies-financials` constituents
 CREATE TEMPORARY TABLE IF NOT EXISTS temp_company_fields_2
 (
     symbol      VARCHAR(10)  NOT NULL,
     sec_filings VARCHAR(255) NOT NULL
 );
 
+-- Ensure it is empty initially
 TRUNCATE temp_company_fields_2;
 
+-- Load the CSV data
 LOAD DATA LOCAL INFILE 'data/s-and-p-500-companies-financials/data/constituents-financials.csv'
     INTO TABLE temp_company_fields_2
     FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
@@ -42,6 +48,7 @@ LOAD DATA LOCAL INFILE 'data/s-and-p-500-companies-financials/data/constituents-
     SET symbol = @Symbol,
         sec_filings = @SEC_Filings;
 
+-- Insert rows into the companies tables, picking columns from both temp tables
 INSERT IGNORE INTO companies (symbol, name, sector_leaf_id, headquarters, date_added, cik, founded, sec_filings)
 SELECT t1.symbol,
        t1.name,
@@ -55,5 +62,6 @@ FROM temp_company_fields_1 t1
          INNER JOIN sector_graph sg on t1.sub_sector = sg.name
          LEFT OUTER JOIN temp_company_fields_2 t2 on t1.symbol = t2.symbol;
 
+-- Cleanup
 DROP TEMPORARY TABLE IF EXISTS temp_company_fields_1;
 DROP TEMPORARY TABLE IF EXISTS temp_company_fields_2;
