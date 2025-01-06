@@ -1,3 +1,4 @@
+-- Group value and growth aggregates by sector and subsector
 SELECT
     sg1.name as sector,
     sg2.name as subsector,
@@ -6,6 +7,7 @@ SELECT
     AVG(cf.price_book) as avg_pb_ratio,
     AVG(cf.price_earnings) as avg_pe_ratio
 FROM sector_graph sg1
+-- Self-join on the sector_graph table to fetch parent and child levels
 INNER JOIN sector_graph sg2 on sg1.id = sg2.parent_id
 INNER JOIN companies c ON c.sector_leaf_id = sg2.id
 INNER JOIN company_financials cf ON c.symbol = cf.symbol

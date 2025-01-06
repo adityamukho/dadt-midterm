@@ -1,3 +1,4 @@
+-- Group metric aggregates by top-level sectors
 SELECT 
     parent.name as sector,
     COUNT(c.symbol) as company_count,

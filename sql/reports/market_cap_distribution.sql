@@ -1,3 +1,4 @@
+-- Create categories by market cap range
 WITH cap_categories AS (
     SELECT 
         c.name,
@@ -10,6 +11,7 @@ WITH cap_categories AS (
     FROM companies c
     INNER JOIN company_financials cf ON c.symbol = cf.symbol
 )
+-- Use categories for grouping market cap aggregates
 SELECT 
     cap_category,
     COUNT(*) as company_count,
